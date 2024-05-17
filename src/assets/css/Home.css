@@ -1,0 +1,45 @@
+p{
+    margin: 3%;
+  }
+  button{
+    margin: 5px;
+    color: white;
+    background-color: orange;
+  }
+  table,tr,th,td{
+    border: 1px solid black;
+    border-collapse:collapse;
+    padding: 7px;
+    margin: 3px;
+    text-align: center;
+  }
+  form,div{
+    margin: 5px;
+    padding: 1.6px;
+  }
+  img{
+    width: 50px;
+    height: 50px;
+  }
+  .Submit{
+    margin-top: 2px;
+    padding: 3px;
+  }
+  .idsort{
+    margin: 10px;
+    padding: 2px;
+  }
+  .search{
+    margin-top: 2px;
+    padding: 3px;
+  }
+  .Edit{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+  }
+  .Delete{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+  }

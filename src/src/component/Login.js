@@ -1,0 +1,79 @@
+import { useFormik } from "formik";
+import axios from "axios"; 
+import { useNavigate } from "react-router-dom";
+const Login = () => {
+    const navigate = useNavigate()
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validate: (values) => {
+            let errors = {};
+            if (!values.email) {
+                errors.email = "Please enter email";
+            }
+            if (!values.password) {
+                errors.password = "Please enter password";
+            }
+            return errors;
+        },
+        onSubmit: (values) => {
+            try { 
+            axios.post(`https://dummyjson.com/auth/login}`,{
+              Method: POST,
+              data: {
+                username:values.email,
+                password:values.password,
+              }
+            }).then(res => {
+                if(res?.status === 200 && res?.data?.token){
+                    localStorage.setItem('token',res?.data?.token)
+                    localStorage.setItem('userData',JSON.stringify (res?.data))
+                    navigate('/')
+                }
+            }).catch(error => {
+                console.log(error.message);
+            })
+                }catch(error){
+                 console.log(error.message);
+             }
+          }
+    });
+     
+    return (
+        <>
+            <h1>Login</h1>
+            <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <input 
+                        type="text"
+                        name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        placeholder="Enter Email"
+                        className={formik.errors.email && 'is-error'}
+                    />
+                    {formik.errors.email ? <div className="error-text">{formik.errors.email}</div> : null}
+                </div>
+                <div>
+                    <input 
+                        type="password"
+                        name="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        placeholder="****"
+                        className={formik.errors.password && 'is-error'}
+
+                    />
+                    {formik.errors.password ? <div  className="error-text">{formik.errors.password}</div> : null}
+                </div>
+                <div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </>
+    );
+};
+
+export default Login;
